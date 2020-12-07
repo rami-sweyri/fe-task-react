@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import "./assets/main.css";
+import "./tailwind.output.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store";
