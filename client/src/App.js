@@ -1,16 +1,30 @@
+import { useEffect } from "react";
 import { Router, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import Routes from "./routes";
-
+import { readSources } from "./actions/sources";
+import { readEvents } from "./actions/events";
+import { connect } from "react-redux";
 import "./App.css";
 import "./tailwind.css";
 
-import Navbar from "./components/Navbar";
-import Customers from "./pages/Customers";
-
 const history = createBrowserHistory();
 
-function App() {
+function App({ readSources, readEvents }) {
+  useEffect(() => {
+    readEvents()
+      .then((result) => {
+        console.log({ result });
+      })
+      .catch((err) => {});
+    readSources()
+      .then((result) => {
+        console.log({ result });
+      })
+      .catch((err) => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Router history={history}>
       <Route component={Routes} />
@@ -18,4 +32,7 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, {
+  readSources,
+  readEvents,
+})(App);

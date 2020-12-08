@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-
-import format from "date-fns/format";
-import { readCustomers } from "../actions/customers";
-import Avatar from "../assets/customer_avatars/Avatar-16.svg";
 import { FaSearch } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
+import format from "date-fns/format";
+
+import { readCustomers } from "../actions/customers";
+import Avatar from "../assets/customer_avatars/Avatar-16.svg";
+import Spinner from "../components/Spinner/BigSpinner";
 
 const Customers = ({ readCustomers, customersReducer }) => {
   useEffect(() => {
@@ -17,7 +18,9 @@ const Customers = ({ readCustomers, customersReducer }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customersReducer.readable]);
 
-  return (
+  return !customersReducer.readable || customersReducer.loading ? (
+    <Spinner />
+  ) : (
     <div className="w-full md:w-9/12 py-12">
       <div className="w-full flex justify-between items-center bg-fe-gray-400 border rounded-8 shadow px-6 py-3 bottom-shadow">
         <p className="text-fe-gray-200 text-2xl font-bold">Customer search</p>
@@ -63,7 +66,7 @@ const Customers = ({ readCustomers, customersReducer }) => {
             </p>
             <p className="w-4/12 text-fe-gray-100 font-thin text-sm">
               {" "}
-              {format(new Date(customer.created), "dd.mm.yyyy, HH:mm:ss")}
+              {format(new Date(customer.created), "dd.MM.yyyy, HH:mm:ss")}
             </p>
             <NavLink
               to={`/customer-profile/${customer.id}`}

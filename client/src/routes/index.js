@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { Switch } from "react-router-dom";
 import LayoutRoute from "./LayoutRoute";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/Spinner/BigSpinner";
 
 const Customers = lazy(() => import("../pages/Customers"));
 const CustomerProfile = lazy(() => import("../pages/CustomerProfile"));

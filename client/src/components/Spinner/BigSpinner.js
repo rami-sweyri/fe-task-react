@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./index.module.css";
 
-const Spinner = () => {
+const BigSpinner = () => {
   return (
     <div className="flex justify-center items-center w-full">
-      <div className={styles.loader}></div>
+      <div className={styles.bigLoader}></div>
     </div>
   );
 };
 
-export default Spinner;
+export default BigSpinner;
