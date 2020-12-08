@@ -1,7 +1,7 @@
 import {
   READ_CUSTOMERS,
   READ_ONE_CUSTOMER,
-  CLEAR_CUSTOMER,
+  CLEAR_CUSTOMERS,
   START_CUSTOMERS_RELOAD,
   FINISHED_CUSTOMERS_RELOAD,
 } from "../types/customers";
@@ -30,10 +30,14 @@ export default function customers(state = initialState, action) {
         customer: { ...payload.customer },
       };
 
-    case CLEAR_CUSTOMER:
+    case CLEAR_CUSTOMERS:
       return {
         ...state,
+        customers: [],
         customer: {},
+        error: {},
+        loading: false,
+        readable: false,
       };
 
     case START_CUSTOMERS_RELOAD:

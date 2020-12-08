@@ -1,26 +1,21 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+
 import format from "date-fns/format";
 import { readCustomers } from "../actions/customers";
 import Avatar from "../assets/customer_avatars/Avatar-16.svg";
 import { FaSearch } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 
-const Customers = ({
-  readCustomers,
-  customersReducer: { customers, loading, readable },
-}) => {
+const Customers = ({ readCustomers, customersReducer }) => {
   useEffect(() => {
     //readable -> It means that the data has been read (fetch)
-    if (!readable) {
-      readCustomers()
-        .then((result) => {
-          console.log({ result });
-        })
-        .catch((err) => {});
+    if (!customersReducer.readable) {
+      readCustomers();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [readable]);
+  }, [customersReducer.readable]);
 
   return (
     <div className="w-full md:w-9/12 py-12">
@@ -50,10 +45,11 @@ const Customers = ({
             created
           </p>
         </div>
-        {customers.map((customer, i) => (
+        {customersReducer.customers.map((customer, i) => (
           <div
+            key={customer.id}
             className={`w-full flex justify-between items-center py-5 px-12 hover:bg-opacity-5 hover:bg-fe-brick-100 relative ${
-              customers.length === i + 1 ? "" : "border-b"
+              customersReducer.customers.length === i + 1 ? "" : "border-b"
             }`}
           >
             <div className="w-4/12 text-fe-gray-200 font-bold flex items-center">
@@ -69,9 +65,12 @@ const Customers = ({
               {" "}
               {format(new Date(customer.created), "dd.mm.yyyy, HH:mm:ss")}
             </p>
-            <div className="text-fe-gray-100 absolute right-0 mx-6 cursor-pointer hover:bg-opacity-10 hover:bg-fe-brick-100 py-2">
+            <NavLink
+              to={`/customer-profile/${customer.id}`}
+              className="text-fe-gray-100 absolute right-0 mx-6 cursor-pointer hover:bg-opacity-10 hover:bg-fe-brick-100 py-2"
+            >
               <IoIosArrowForward />
-            </div>
+            </NavLink>
           </div>
         ))}
         <div className="w-full flex justify-center my-3">

@@ -2,7 +2,7 @@ import {
   READ_CUSTOMERS,
   READ_ONE_CUSTOMER,
   CUSTOMER_ERROR,
-  CLEAR_CUSTOMER,
+  CLEAR_CUSTOMERS,
   START_CUSTOMERS_RELOAD,
   FINISHED_CUSTOMERS_RELOAD,
 } from "../types/customers";
@@ -33,10 +33,7 @@ export const readCustomers = () =>
 
 export const readOneCustomer = (id) =>
   readOneItemAsync({
-    url:
-      typeof process.env.REACT_APP_CLIENT_ID !== "undefined"
-        ? process.env.REACT_APP_CUSTOMERS_BACKEND_URL + "/"
-        : localStorage.getItem("REACT_APP_BACKEND_URL") + "/customers/",
+    url: "http://localhost:5000/customers",
     successType: READ_ONE_CUSTOMER,
     errorType: CUSTOMER_ERROR,
     startReload: startCustomersReload,
@@ -45,15 +42,9 @@ export const readOneCustomer = (id) =>
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      "x-client":
-        typeof process.env.REACT_APP_CLIENT_ID !== "undefined"
-          ? process.env.REACT_APP_CLIENT_ID
-          : localStorage.getItem("REACT_APP_CLIENT_ID"),
-      "x-access-token": localStorage.getItem("token"),
-      "accept-language": localStorage.getItem("i18nextLng"),
     },
   });
 
 export const clearCustomer = () => (dispatch) => {
-  dispatch({ type: CLEAR_CUSTOMER });
+  dispatch({ type: CLEAR_CUSTOMERS });
 };
