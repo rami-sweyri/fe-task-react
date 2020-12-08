@@ -1,15 +1,20 @@
+import { Router, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
+import Routes from "./routes";
+
 import "./App.css";
+import "./tailwind.css";
+
 import Navbar from "./components/Navbar";
 import Customers from "./pages/Customers";
 
+const history = createBrowserHistory();
+
 function App() {
   return (
-    <div className=" w-full flex justify-center items-center p-6">
-      <div className="w-full md:w-9/12">
-        {/* <Navbar /> */}
-        <Customers />
-      </div>
-    </div>
+    <Router history={history}>
+      <Route component={Routes} />
+    </Router>
   );
 }
 
