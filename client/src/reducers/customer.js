@@ -1,10 +1,12 @@
 import {
-  READ_CUSTOMER_EVENTS,
-  CLEAR_CUSTOMER_EVENTS,
-} from "../types/customer_events";
+  READ_ONE_CUSTOMER,
+  READ_CUSTOMER_SOURCES,
+  CLEAR_CUSTOMER_DETAIL,
+} from "../types/customer";
 
 const initialState = {
-  customer_events: [],
+  customer: {},
+  customer_sources: [],
   error: {},
   loading: false,
   readable: false,
@@ -14,17 +16,23 @@ export default function customerEvents(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case READ_CUSTOMER_EVENTS:
+    case READ_ONE_CUSTOMER:
       return {
         ...state,
-        customer_events: [...payload.customer_events],
+        customer: { ...payload.customer },
+      };
+
+    case READ_CUSTOMER_SOURCES:
+      return {
+        ...state,
+        customer_sources: [...payload],
         readable: true,
       };
 
-    case CLEAR_CUSTOMER_EVENTS:
+    case CLEAR_CUSTOMER_DETAIL:
       return {
         ...state,
-        customer_events: [],
+        customer_sources: [],
         error: {},
         loading: false,
         readable: false,

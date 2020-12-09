@@ -1,9 +1,4 @@
-import {
-  READ_EVENTS,
-  CLEAR_EVENTS,
-  START_EVENTS_RELOAD,
-  FINISHED_EVENTS_RELOAD,
-} from "../types/events";
+import { READ_EVENTS, CLEAR_EVENTS } from "../types/events";
 
 const initialState = {
   events: [],
@@ -32,16 +27,6 @@ export default function events(state = initialState, action) {
         readable: false,
       };
 
-    case START_EVENTS_RELOAD:
-      return {
-        ...state,
-        loading: true,
-      };
-    case FINISHED_EVENTS_RELOAD:
-      return {
-        ...state,
-        loading: false,
-      };
     default:
       return state;
   }

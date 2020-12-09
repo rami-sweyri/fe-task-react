@@ -1,14 +1,14 @@
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import Spinner from "./Spinner/SmallSpinner";
+import Spinner from "../Spinner/SmallSpinner";
 
 const EventItem = ({
   event_id,
   datetime,
   eventsReducer,
   sourcesReducer,
-  isToday,
+  group,
 }) => {
   const [event, setEvent] = useState({});
   const [sources, serSources] = useState({ readable: false });
@@ -32,26 +32,26 @@ const EventItem = ({
   return (
     <div
       className={`w-9/12 flex justify-between items-center bg-white border rounded-8 shadow px-6 py-3 bottom-shadow ${
-        isToday ? "mt-3" : "mt-6"
+        group ? "mt-3" : "mt-6"
       }`}
     >
       <div className="flex items-center">
         {sources.id ? (
           <img
-            className={`${isToday ? "w-6 h-6" : "w-8 h-8"}`}
+            className={`${group ? "w-8 h-8" : "w-8 h-8"}`}
             src={
-              require("../assets/source_logos/" +
+              require("../../assets/source_logos/" +
                 sources.frontend_settings.icon).default
             }
             alt={event.title}
           />
         ) : (
-          <div className={`${isToday ? "w-6 h-6" : "w-8 h-8"}`}>
+          <div className={`${group ? "w-8 h-8" : "w-8 h-8"}`}>
             <Spinner />
           </div>
         )}
         <p
-          className={`mx-2 font-bold ${isToday ? "text-sm" : "text-base"}`}
+          className={`mx-2 font-bold ${group ? "text-sm" : "text-base"}`}
           style={{
             color: sources.id ? sources.frontend_settings.color : "#222222",
           }}
@@ -61,7 +61,7 @@ const EventItem = ({
       </div>
       <span
         className={`text-fe-gray-300 font-normal ${
-          isToday ? "text-xs" : "text-sm"
+          group ? "text-xs" : "text-sm"
         }`}
       >
         {format(new Date(datetime), "dd.MM.yyyy, HH:mm:ss")}

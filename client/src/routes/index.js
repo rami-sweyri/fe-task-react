@@ -4,7 +4,7 @@ import LayoutRoute from "./LayoutRoute";
 import Spinner from "../components/Spinner/BigSpinner";
 
 const Customers = lazy(() => import("../pages/Customers"));
-const CustomerProfile = lazy(() => import("../pages/CustomerProfile"));
+const CustomerDetail = lazy(() => import("../pages/CustomerDetail"));
 
 const Routes = () => {
   return (
@@ -20,8 +20,8 @@ const Routes = () => {
         <LayoutRoute exact path="/customers" component={Customers} />
         <LayoutRoute
           exact
-          path="/customer-profile/:id"
-          component={CustomerProfile}
+          path="/customer-detail/:id"
+          component={CustomerDetail}
         />
       </Switch>
     </Suspense>

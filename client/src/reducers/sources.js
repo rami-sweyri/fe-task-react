@@ -1,9 +1,4 @@
-import {
-  READ_SOURCES,
-  CLEAR_SOURCES,
-  START_SOURCES_RELOAD,
-  FINISHED_SOURCES_RELOAD,
-} from "../types/sources";
+import { READ_SOURCES, CLEAR_SOURCES } from "../types/sources";
 
 const initialState = {
   sources: [],
@@ -32,16 +27,6 @@ export default function sources(state = initialState, action) {
         readable: false,
       };
 
-    case START_SOURCES_RELOAD:
-      return {
-        ...state,
-        loading: true,
-      };
-    case FINISHED_SOURCES_RELOAD:
-      return {
-        ...state,
-        loading: false,
-      };
     default:
       return state;
   }

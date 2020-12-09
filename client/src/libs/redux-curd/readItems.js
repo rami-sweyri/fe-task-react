@@ -19,8 +19,7 @@ export const readItemsAsync = (data) => {
     };
     try {
       !data.noReload && dispatch(data.startReload());
-      let url;
-      url = data.url.includes("https") ? data.url : data.url;
+      let url = data.url;
       const success = data.formData
         ? await axios.get(url, data.formData, config)
         : await axios.get(url, config);

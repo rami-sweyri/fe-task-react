@@ -12,16 +12,9 @@ const history = createBrowserHistory();
 
 function App({ readSources, readEvents }) {
   useEffect(() => {
-    readEvents()
-      .then((result) => {
-        console.log({ result });
-      })
-      .catch((err) => {});
-    readSources()
-      .then((result) => {
-        console.log({ result });
-      })
-      .catch((err) => {});
+    readEvents();
+    readSources();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
