@@ -11,7 +11,7 @@ const EventItem = ({
   group,
 }) => {
   const [event, setEvent] = useState({});
-  const [sources, serSources] = useState({ readable: false });
+  const [sources, serSources] = useState({ });
 
   useEffect(() => {
     setEvent(eventsReducer.events.find((event) => event.id === event_id));
