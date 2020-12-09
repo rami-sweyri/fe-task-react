@@ -61,9 +61,9 @@ const CustomerDetail = ({
       <div className="flex flex-col items-center">
         <CustomerNavbar />
 
-        {customerEventsGroup.map((eventsGroup) => {
+        {customerEventsGroup.map((eventsGroup, i) => {
           return eventsGroup[1].length > 1 ? (
-            <EventItemGroup eventsGroup={eventsGroup} />
+            <EventItemGroup key={i} eventsGroup={eventsGroup} />
           ) : (
             eventsGroup[1].map((customer_event) => (
               <EventItem

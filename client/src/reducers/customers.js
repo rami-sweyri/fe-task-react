@@ -1,4 +1,3 @@
-import { tr } from "date-fns/locale";
 import {
   READ_CUSTOMERS,
   CLEAR_CUSTOMERS,
